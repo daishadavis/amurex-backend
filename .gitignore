@@ -3,3 +3,5 @@ venv
 supabase/.temp
 a.py
 playground
+.env.swp
+node_modules/
