@@ -62,6 +62,7 @@ db = DatabaseManager()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 groq_api_key = os.getenv("GROQ_API_KEY")
 gemini_api_key = os.getenv("GEMINI_API_KEY")
+ollama_model = os.getenv('OLLAMA_MODEL')
 
 class AIClientAdapter:
     def __init__(self, client_mode, ollama_url):
@@ -74,7 +75,7 @@ class AIClientAdapter:
     def chat_completions_create(self, model, messages, temperature=0.2, response_format=None):
         # expect llama3.2 as the model name
         local = {
-            "llama3.2": "llama3.2",
+            "llama3.2": ollama_model,
             "gpt-4o": "llama3.2"
         }
         groq = {
@@ -1619,6 +1620,22 @@ def check_memory_enabled(user_id):
         logger.error(f"Error checking memory enabled for user {user_id}: {str(e)}")
         return False
 
+@app.post('/embeddings')
+async def fast_embed(request: Request, body):
+    data = json.loads(body)
+    text = data.get("text", "")
+    
+    if not text:
+        return Response(status_code=400, description="No text provided", headers={})
+    
+    try:
+        embeddings = embedding_client.embeddings(text)
+        return {"embeddings": embeddings}
+    except Exception as e:
+        logger.error(f"Error generating embeddings: {str(e)}")
+        return Response(status_code=500, description=f"Error generating embeddings: {str(e)}", headers={})
+    
+    
 @app.post("/end_meeting")
 async def end_meeting(request: Request, body: EndMeetingRequest):
     # the logic here could be simplified as well
