@@ -1632,7 +1632,8 @@ async def fast_embed(request: Request, body):
         logger.info(f"Generating embeddings in LOCAL Mode")
         embeddings = embedding_client.embeddings(text)
         
-        if fast_embed:
+        from fastembed import TextEmbedding
+        if TextEmbedding:
             logger.info('Fastemebd is installed')
         
         if embeddings is None:
