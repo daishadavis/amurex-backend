@@ -139,6 +139,13 @@ vim .env
 
 ```
 docker build -t amurex-backend .
+
+# If you experience any DNS resolution issue after previously building the dockerfile
+# configure the DNS with docker Daemon
+
+  - sudo sudo nano /etc/docker/daemon.json
+  - Add these DNS settings: {"dns": ["8.8.8.8", "8.8.4.4"]}`
+  - Restart docker: sudo systemcl restart docker
 ```
 
 5. Run the Docker container:

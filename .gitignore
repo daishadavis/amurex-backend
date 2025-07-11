@@ -3,5 +3,8 @@ venv
 supabase/.temp
 a.py
 playground
+__pycache__
+meetings.db
+.env.swp 
 .env.swp
 node_modules/
