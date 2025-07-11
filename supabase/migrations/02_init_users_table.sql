@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS users (
     google_access_token TEXT,
     google_refresh_token TEXT,
     google_token_version TEXT,
+    google_cohort INTEGER,
+    google_token_expiry TIMESTAMP,
 
     calendar_connected BOOLEAN DEFAULT FALSE,
     calendar_access_token TEXT,
@@ -24,6 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
 
     memory_enabled BOOLEAN DEFAULT TRUE,
     analytics_enabled BOOLEAN DEFAULT FALSE
+
 );
 
 -- Ensure updated_at is updated automatically
