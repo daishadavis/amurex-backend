@@ -6,5 +6,5 @@ create table user_gmails (
     google_cohort text,
     user_id uuid references users(id) on delete cascade,
     access_token text,
-    google_clients uuid references google_clients(id) on delete cascade
+    google_clients serial references google_clients(id) on delete cascade
 );
