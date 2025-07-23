@@ -21,9 +21,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     TOTAL_RAM_GB=$((TOTAL_RAM_BYTES / 1024 / 1024 / 1024))
 else
     #scrutinize for Windows
-        TOTAL_RAM_GB=16
-        echo "⚠️  Cannot detect RAM on this system - proceeding anyway"
-    fi
+    TOTAL_RAM_GB=16
+    echo "⚠️  Cannot detect RAM on this system - proceeding anyway"
 fi
 
 if [ $TOTAL_RAM_GB -lt 10 ]; then
@@ -66,7 +65,7 @@ if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/
     exit 1
 fi
 
-Detect operating system
+#Detect operating system
 OS="$(uname -s)"
 case "${OS}" in
     Linux*)     MACHINE=Linux;;
